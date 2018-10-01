@@ -1,13 +1,13 @@
-- kind: PersistentVolumeClaim
-  apiVersion: v1
-  metadata:
-    name: {{ .Values.name | quote }}
-    namespace: {{ .Values.name | quote }}
-    labels:
-      app: {{ .Values.name | quote }}
-  spec:
-    accessModes:
-    - ReadWriteMany
-    resources:
-      requests:
-        storage: {{ .Values.backup-capacity }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.name | quote }}
+  namespace: {{ .Values.name | quote }}
+  labels:
+    app: {{ .Values.name | quote }}
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.backupCapacity | quote }}

@@ -33,7 +33,7 @@ spec:
         - name: POD_NAMESPACE
           value: {{ .Values.namespace | quote }}
         - name: BACKUP_SECRETS
-          value: {{ .Values.backup-secrets }}
+          value: {{ .Values.backupSecrets }}
         volumeMounts:
         - name: "{{ .Values.name }}-data"
           mountPath: /k8s-backup
