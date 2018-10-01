@@ -12,7 +12,7 @@ Please note that no attempt is made to back up the contents of databases or moun
 
 Admin access is required at the start (to create project and the `cluster-reader` and `secret-reader` ClusterRoleBindings for the service account), but from then on access is strictly controlled.
 
-**NOTE** `secret-reader` is only needed if you intent to backup Secrets. To not backup Secrets, use the [`template-no-secret-backup.yml`](/k8s/template-no-secret.yml). The [`template.yml`](/k8s/template.yml) will backup Secrets and other objects.
+**NOTE** `secret-reader` is only needed if you intend to backup Secrets. To not backup Secrets, pass `set backup-secrets=false` to `helm`.
 
 ![Permissions](ditaa/permissions.png)
 
