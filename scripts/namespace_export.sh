@@ -8,10 +8,10 @@ die(){
 }
 
 usage(){
-    echo "$0 <projectname>"
-    echo "  projectname  The name of the Kubernetes namespace to be exported."
+    echo "$0 <namespace>"
+    echo "  namespace  The name of the Kubernetes namespace to be exported."
     echo "Examples:"
-    echo "  $0 myproject"
+    echo "  $0 mynamespace"
     echo "Env variables:"
     echo "  BACKUP_SECRETS (default true) if secrets should be backed up."
 }
@@ -26,9 +26,9 @@ exportlist(){
     BASENAME=$2
     DELETEPARAM=$3
 
-    echo "Exporting '${KIND}' resources to ${PROJECT}/${BASENAME}.json"
+    echo "Exporting '${KIND}' resources to ${NAMESPACE}/${BASENAME}.json"
 
-    BUFFER=$(oc get "${KIND}" --export -o json -n "${PROJECT}" || true)
+    BUFFER=$(kubectl get "${KIND}" --export -o json -n "${NAMESPACE}" || true)
 
     # return if resource type unknown or access denied
     if [ -z "${BUFFER}" ]; then
@@ -42,7 +42,7 @@ exportlist(){
         return
     fi
 
-    echo "${BUFFER}" | jq "${DELETEPARAM}" > "${PROJECT}/${BASENAME}.json"
+    echo "${BUFFER}" | jq "${DELETEPARAM}" > "${NAMESPACE}/${BASENAME}.json"
 }
 
 ns(){
@@ -102,30 +102,6 @@ secrets(){
         ')'
 }
 
-dcs(){
-    echo "Exporting deploymentconfigs to ${PROJECT}/dc_*.json"
-    DCS=$(oc get dc -n "${PROJECT}" -o jsonpath="{.items[*].metadata.name}")
-    for dc in ${DCS}; do
-        oc get --export -o=json dc "${dc}" -n "${PROJECT}" | jq '
-      del(.status,
-          .metadata.uid,
-          .metadata.selfLink,
-          .metadata.resourceVersion,
-          .metadata.creationTimestamp,
-          .metadata.generation,
-          .spec.triggers[].imageChangeParams.lastTriggeredImage
-        )' > "${PROJECT}/dc_${dc}.json"
-        if jq '.spec.triggers[].type' "${PROJECT}/dc_${dc}.json" | ! grep -q "ImageChange"; then
-            for container in $(jq -r '.spec.triggers[] | select(.type == "ImageChange") .imageChangeParams.containerNames[]' "${PROJECT}/dc_${dc}.json"); do
-                echo "Patching DC..."
-                OLD_IMAGE=$(jq --arg cname "${container}" -r '.spec.template.spec.containers[] | select(.name == $cname)| .image' "${PROJECT}/dc_${dc}.json")
-                NEW_IMAGE=$(jq -r '.spec.triggers[] | select(.type == "ImageChange") .imageChangeParams.from.name // empty' "${PROJECT}/dc_${dc}.json")
-                sed -e "s#$OLD_IMAGE#$NEW_IMAGE#g" "${PROJECT}/dc_${dc}.json" >> "${PROJECT}/dc_${dc}_patched.json"
-            done
-        fi
-    done
-}
-
 bcs(){
     exportlist \
         bc \
@@ -162,8 +138,7 @@ is(){
         '.items[].metadata.selfLink,'\
         '.items[].metadata.resourceVersion,'\
         '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation,'\
-        '.items[].metadata.annotations."openshift.io/image.dockerRepositoryCheck")'
+        '.items[].metadata.generation)'
 }
 
 rcs(){
@@ -180,10 +155,10 @@ rcs(){
 }
 
 svcs(){
-    echo "Exporting services to ${PROJECT}/svc_*.json"
-    SVCS=$(oc get svc -n "${PROJECT}" -o jsonpath="{.items[*].metadata.name}")
+    echo "Exporting services to ${NAMESPACE}/svc_*.json"
+    SVCS=$(kubectl get svc -n "${NAMESPACE}" -o jsonpath="{.items[*].metadata.name}")
     for svc in ${SVCS}; do
-        oc get --export -o=json svc "${svc}" -n "${PROJECT}" | jq '
+        kubectl get --export -o=json svc "${svc}" -n "${NAMESPACE}" | jq '
       del(.status,
             .metadata.uid,
             .metadata.selfLink,
@@ -191,16 +166,16 @@ svcs(){
             .metadata.creationTimestamp,
             .metadata.generation,
             .spec.clusterIP
-        )' > "${PROJECT}/svc_${svc}.json"
-        if [[ $(jq -e '.spec.selector.app' "${PROJECT}/svc_${svc}.json") == "null" ]]; then
-            oc get --export -o json endpoints "${svc}" -n "${PROJECT}" | jq '
+        )' > "${NAMESPACE}/svc_${svc}.json"
+        if [[ $(jq -e '.spec.selector.app' "${NAMESPACE}/svc_${svc}.json") == "null" ]]; then
+            kubectl get --export -o json endpoints "${svc}" -n "${NAMESPACE}" | jq '
         del(.status,
             .metadata.uid,
             .metadata.selfLink,
             .metadata.resourceVersion,
             .metadata.creationTimestamp,
             .metadata.generation
-            )' > "${PROJECT}/endpoint_${svc}.json"
+            )' > "${NAMESPACE}/endpoint_${svc}.json"
         fi
     done
 }
@@ -472,9 +447,9 @@ for i in jq oc; do
     command -v $i >/dev/null 2>&1 || die "$i required but not found" 3
 done
 
-PROJECT="${1}"
+NAMESPACE="${1}"
 
-mkdir -p "${PROJECT}"
+mkdir -p "${NAMESPACE}"
 
 ns
 rolebindings
@@ -482,24 +457,18 @@ serviceaccounts
 if ${BACKUP_SECRETS}; then
     secrets
 fi
-dcs
-bcs
-builds
-is
-imagestreamtags
 rcs
 svcs
 pods
 podpreset
 cms
 egressnetworkpolicies
+ingress
 rolebindingrestrictions
 limitranges
 resourcequotas
 pvcs
 pvcs_attachment
-routes
-templates
 cronjobs
 statefulsets
 hpas
