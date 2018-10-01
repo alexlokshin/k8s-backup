@@ -1,0 +1,8 @@
+name: "k8s-backup"
+namespace: "default"
+schedule: "15 0 * * *"
+backup-capacity: "2Gi"
+# space-separated list of namespaces OR asterisk for all
+backup-namespaces: "*"
+backup-retain-days: 7
+backup-secrets: true

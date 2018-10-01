@@ -1,0 +1,47 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.name | quote }}
+  namespace: {{ .Values.namespace | quote }}
+  labels:
+    app: {{ .Values.name | quote }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountname: {{ .Values.name | quote }}
+          serviceAccount: {{ .Values.name | quote }}
+          containers:
+          -
+            name: {{ .Values.name | quote }}
+            image: gerald1248/k8s-backup
+            resources:
+              limits:
+                cpu: 200m
+                memory: 1Gi
+              requests:
+                cpu: 100m
+                memory: 512Mi
+            args:
+            - /bin/sh
+            - -c
+            - k8s-backup || true
+            env:
+            - name: POD_NAMESPACE
+              value: {{ .Values.namespace | quote }}
+            - name: K8S_BACKUP_RETAIN_DAYS
+              value: {{ Values.backup-retain-days }}
+            - name: BACKUP_SECRETS
+              value: {{ Values.backup-secrets }}
+            volumeMounts:
+            - name: "{{ .Values.name }}-data"
+              mountPath: /k8s-backup
+          volumes:
+          - name: "{{ .Values.name }}-data"
+            persistentVolumeClaim:
+              claimName: {{ .Values.name | quote }}
+          restartPolicy: Never

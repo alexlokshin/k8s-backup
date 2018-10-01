@@ -1,0 +1,14 @@
+apiVersion: v1
+name: k8s-backup
+version: 0.1.0
+description: "automated namespace backups"
+icon: "https://docs.helm.sh/src/img/helm-logo.svg"
+keywords:
+  - backup
+  - automation
+home: https://github.com/gerald1248/k8s-backup
+sources:
+  - https://github.com/gerald1248/k8s-backup
+maintainers:
+  - name: gerald1248
+    email: gerald1248@gmail.com

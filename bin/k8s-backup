@@ -1,0 +1,31 @@
+#!/bin/sh
+
+if [ -z "${K8S_BACKUP_RETAIN_DAYS}" ]; then
+    K8S_BACKUP_RETAIN_DAYS=7
+fi
+
+# work from home dir
+cd /app || { echo "Could not change dir to '/app', exiting"; exit 1; }
+
+# no cached data
+rm -rf /app/*
+
+# run the export
+if [ K8S_BACKUP_ALL ]; then
+  NAMESPACES=$(oc get projects --no-headers | awk '{ print $1 }')
+else
+  NAMESPACES=${K8S_NAMESPACES}
+fi
+
+for NAMESPACE in ${NAMESPACES}; do
+  echo "Processing '${NAMESPACE}'"
+  /bin/bash namespace_export.sh "${NAMESPACE}"
+done
+
+# store
+DATESTAMP="$(date +%Y%m%d)"
+zip -r "/k8s-backup/k8s-backup${DATESTAMP}.zip" -- *
+chmod 666 "/k8s-backup/k8s-backup${DATESTAMP}.zip"
+
+# delete files older than ${K8S_BACKUP_RETAIN_DAYS}
+find /k8s-backup/ -type f -mtime +"${K8S_BACKUP_RETAIN_DAYS}" -name '*.zip' -execdir rm -- '{}' +
