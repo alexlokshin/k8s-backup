@@ -5,7 +5,7 @@
 
 ![Overview of k8s-backup](ditaa/backup-restore.png)
 
-This project sets up a CronJob running the basic project backup script [project_export.sh on GitHub](https://raw.githubusercontent.com/gerald1248/k8s-ansible-contrib/refactor_export/reference-architecture/day2ops/scripts/project_export.sh).
+This project sets up a CronJob running a basic namespace backup script `namespace_export.sh` (based on `project_export.sh` on [GitHub](https://raw.githubusercontent.com/gerald1248/k8s-ansible-contrib/refactor_export/reference-architecture/day2ops/scripts/project_export.sh).
 The basic project backup script will only backup v1 api version objects, to get a list of backed up objects see [scripts/project_export.sh Line 2-5](/scripts/project_export.sh#L2-L5).
 
 Please note that no attempt is made to back up the contents of databases or mounted persistent volumes. This backup focuses on the API objects stored in `etcd`.
