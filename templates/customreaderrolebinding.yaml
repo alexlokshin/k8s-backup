@@ -13,7 +13,7 @@ metadata:
     app: {{ .Values.name | quote }}
 roleRef:
   kind: ClusterRole
-  name: secret-reader
+  name: custom-reader
 subjects:
 -
   kind: ServiceAccount

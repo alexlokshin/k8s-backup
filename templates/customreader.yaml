@@ -1,14 +1,14 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: secret-reader
+  name: custom-reader
 rules:
 {{ if .Values.backupSecrets }}
 - apiGroups: [""]
-  resources: ["secrets"]
+  resources: ["secrets", "rolebindings"]
   verbs: ["get", "list"]
 {{ else }}
-- apiGroups: [""]
+- apiGroups: ["rolebindings"]
   resources: []
   verbs: ["get", "list"]
 {{ end }}
