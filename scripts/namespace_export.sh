@@ -443,7 +443,7 @@ if [[ $# -lt 1 ]]; then
     die "projectname not provided" 2
 fi
 
-for i in jq oc; do
+for i in jq kubectl; do
     command -v $i >/dev/null 2>&1 || die "$i required but not found" 3
 done
 

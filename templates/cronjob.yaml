@@ -34,14 +34,20 @@ spec:
             - name: POD_NAMESPACE
               value: {{ .Values.namespace | quote }}
             - name: K8S_BACKUP_RETAIN_DAYS
-              value: {{ Values.backupRetainDays }}
+              value: {{ .Values.backupRetainDays | quote }}
             - name: BACKUP_SECRETS
-              value: {{ Values.backupSecrets }}
+              value: {{ .Values.backupSecrets | quote }}
             volumeMounts:
             - name: "{{ .Values.name }}-data"
               mountPath: /k8s-backup
+{{ if .Values.backupEphemeral }}
+          volumes:
+          - name: "{{ .Values.name }}-data"
+            emptyDir: {}
+{{ else }}
           volumes:
           - name: "{{ .Values.name }}-data"
             persistentVolumeClaim:
               claimName: {{ .Values.name | quote }}
+{{ end }}
           restartPolicy: Never

@@ -1,8 +1,9 @@
+{{ if .Values.backupEphemeral }}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: {{ .Values.name | quote }}
-  namespace: {{ .Values.name | quote }}
+  namespace: {{ .Values.namespace | quote }}
   labels:
     app: {{ .Values.name | quote }}
 spec:
@@ -11,3 +12,4 @@ spec:
   resources:
     requests:
       storage: {{ .Values.backupCapacity | quote }}
+{{ end }}

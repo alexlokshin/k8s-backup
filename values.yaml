@@ -6,3 +6,4 @@ backupCapacity: "2Gi"
 backupNamespaces: "*"
 backupRetainDays: 7
 backupSecrets: true
+backupEphemeral: true
