@@ -115,6 +115,18 @@ bcs(){
 '.items[].spec.triggers[].imageChangeParams.lastTriggeredImage)'
 }
 
+ingress(){
+    exportlist \
+        ingress \
+        ingress \
+        'del('\
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.generation)'
+}
+
 builds(){
     exportlist \
         builds \
