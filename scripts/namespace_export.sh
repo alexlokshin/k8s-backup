@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# based on project_export.sh in:
+# https://github.com/openshift/openshift-ansible-contrib/tree/master/reference-architecture/
+# with contributions by Alexander Trost
+
 set -eo pipefail
 
 die(){
@@ -113,6 +117,18 @@ bcs(){
 '.items[].metadata.resourceVersion,'\
 '.items[].metadata.generation,'\
 '.items[].spec.triggers[].imageChangeParams.lastTriggeredImage)'
+}
+
+ingresses(){
+    exportlist \
+        ingress \
+        ingresses \
+        'del('\
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.generation)'
 }
 
 builds(){
@@ -274,17 +290,6 @@ templates(){
 '.items[].metadata.generation)'
 }
 
-egressnetworkpolicies(){
-    exportlist \
-        egressnetworkpolicies \
-        egressnetworkpolicies \
-        'del('\
-'.items[].metadata.uid,'\
-'.items[].metadata.selfLink,'\
-'.items[].metadata.resourceVersion,'\
-'.items[].metadata.creationTimestamp)'
-}
-
 imagestreamtags(){
     exportlist \
         imagestreamtags \
@@ -440,7 +445,7 @@ fi
 
 if [[ $# -lt 1 ]]; then
     usage
-    die "projectname not provided" 2
+    die "namespace not provided" 2
 fi
 
 for i in jq kubectl; do
@@ -462,8 +467,7 @@ svcs
 pods
 podpreset
 cms
-egressnetworkpolicies
-ingress
+ingresses
 rolebindingrestrictions
 limitranges
 resourcequotas
