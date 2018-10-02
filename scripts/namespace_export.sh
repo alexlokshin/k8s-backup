@@ -50,12 +50,12 @@ ns(){
         ns \
         ns \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 rolebindings(){
@@ -63,10 +63,10 @@ rolebindings(){
         rolebindings \
         rolebindings \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp)'
 }
 
 serviceaccounts(){
@@ -74,10 +74,10 @@ serviceaccounts(){
         serviceaccounts \
         serviceaccounts \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp)'
 }
 
 secrets(){
@@ -85,21 +85,21 @@ secrets(){
         secrets \
         secrets \
         'del('\
-        '.items[]|select(.type=='\
-        '"'\
-        'kubernetes.io/service-account-token'\
-        '"'\
-        '))|'\
-        'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.annotations.'\
-        '"'\
-        'kubernetes.io/service-account.uid'\
-        '"'\
-        ')'
+'.items[]|select(.type=='\
+'"'\
+'kubernetes.io/service-account-token'\
+'"'\
+'))|'\
+'del('\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.annotations.'\
+'"'\
+'kubernetes.io/service-account.uid'\
+'"'\
+')'
 }
 
 bcs(){
@@ -107,12 +107,12 @@ bcs(){
         bc \
         bcs \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.generation,'\
-        '.items[].spec.triggers[].imageChangeParams.lastTriggeredImage)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.generation,'\
+'.items[].spec.triggers[].imageChangeParams.lastTriggeredImage)'
 }
 
 builds(){
@@ -120,12 +120,12 @@ builds(){
         builds \
         builds \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 is(){
@@ -133,12 +133,12 @@ is(){
         is \
         iss \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 rcs(){
@@ -146,12 +146,12 @@ rcs(){
         rc \
         rcs \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 svcs(){
@@ -185,12 +185,12 @@ pods(){
         po \
         pods \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 cms(){
@@ -198,12 +198,12 @@ cms(){
         cm \
         cms \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 pvcs(){
@@ -211,28 +211,28 @@ pvcs(){
         pvc \
         pvcs \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation,'\
-        '.items[].metadata.annotations['\
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation,'\
+'.items[].metadata.annotations['\
 '"'\
 'pv.kubernetes.io/bind-completed'\
 '"'\
 '],'\
-        '.items[].metadata.annotations['\
+'.items[].metadata.annotations['\
 '"'\
 'pv.kubernetes.io/bound-by-controller'\
 '"'\
 '],'\
-        '.items[].metadata.annotations['\
+'.items[].metadata.annotations['\
 '"'\
 'volume.beta.kubernetes.io/storage-provisioner'\
 '"'\
 '],'\
-        '.items[].spec.volumeName)'
+'.items[].spec.volumeName)'
 }
 
 pvcs_attachment(){
@@ -240,12 +240,12 @@ pvcs_attachment(){
         pvc \
         pvcs_attachment \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 routes(){
@@ -253,12 +253,12 @@ routes(){
         routes \
         routes \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 templates(){
@@ -266,12 +266,12 @@ templates(){
         templates \
         templates \
         'del('\
-        '.items[].status,'\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation)'
+'.items[].status,'\
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation)'
 }
 
 egressnetworkpolicies(){
@@ -279,10 +279,10 @@ egressnetworkpolicies(){
         egressnetworkpolicies \
         egressnetworkpolicies \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp)'
 }
 
 imagestreamtags(){
@@ -290,11 +290,11 @@ imagestreamtags(){
         imagestreamtags \
         imagestreamtags \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].tag.generation)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].tag.generation)'
 }
 
 rolebindingrestrictions(){
@@ -302,10 +302,10 @@ rolebindingrestrictions(){
         rolebindingrestrictions \
         rolebindingrestrictions \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp)'
 }
 
 limitranges(){
@@ -313,10 +313,10 @@ limitranges(){
         limitranges \
         limitranges \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp)'
 }
 
 resourcequotas(){
@@ -324,11 +324,11 @@ resourcequotas(){
         resourcequotas \
         resourcequotas \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].status)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].status)'
 }
 
 podpreset(){
@@ -336,10 +336,10 @@ podpreset(){
         podpreset \
         podpreset \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp)'
 }
 
 cronjobs(){
@@ -347,11 +347,11 @@ cronjobs(){
         cronjobs \
         cronjobs \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].status)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].status)'
 }
 
 statefulsets(){
@@ -359,11 +359,11 @@ statefulsets(){
         statefulsets \
         statefulsets \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].status)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].status)'
 }
 
 hpas(){
@@ -371,11 +371,11 @@ hpas(){
         hpa \
         hpas \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].status)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].status)'
 }
 
 deployments(){
@@ -383,12 +383,12 @@ deployments(){
         deploy \
         deployments \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation,'\
-        '.items[].status)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation,'\
+'.items[].status)'
 }
 
 replicasets(){
@@ -396,13 +396,13 @@ replicasets(){
         replicasets \
         replicasets \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation,'\
-        '.items[].status,'\
-        '.items[].ownerReferences.uid)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation,'\
+'.items[].status,'\
+'.items[].ownerReferences.uid)'
 }
 
 poddisruptionbudget(){
@@ -410,12 +410,12 @@ poddisruptionbudget(){
         poddisruptionbudget \
         poddisruptionbudget \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation,'\
-        '.items[].status)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation,'\
+'.items[].status)'
 }
 
 daemonset(){
@@ -423,12 +423,12 @@ daemonset(){
         daemonset \
         daemonset \
         'del('\
-        '.items[].metadata.uid,'\
-        '.items[].metadata.selfLink,'\
-        '.items[].metadata.resourceVersion,'\
-        '.items[].metadata.creationTimestamp,'\
-        '.items[].metadata.generation,'\
-        '.items[].status)'
+'.items[].metadata.uid,'\
+'.items[].metadata.selfLink,'\
+'.items[].metadata.resourceVersion,'\
+'.items[].metadata.creationTimestamp,'\
+'.items[].metadata.generation,'\
+'.items[].status)'
 }
 
 BACKUP_SECRETS="${BACKUP_SECRETS:-true}"
