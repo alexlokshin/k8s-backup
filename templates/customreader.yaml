@@ -3,12 +3,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: custom-reader
 rules:
-{{ if .Values.backupSecrets }}
 - apiGroups: [""]
-  resources: ["secrets", "rolebindings"]
-  verbs: ["get", "list"]
-{{ else }}
-- apiGroups: ["rolebindings"]
-  resources: []
-  verbs: ["get", "list"]
+  resources:
+{{ if .Values.backupSecrets }}
+  - secrets
 {{ end }}
+  - rolebindings
+  verbs: ["get", "watch", "list"]
