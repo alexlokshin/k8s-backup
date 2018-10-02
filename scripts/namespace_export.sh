@@ -302,17 +302,6 @@ imagestreamtags(){
 '.items[].tag.generation)'
 }
 
-rolebindingrestrictions(){
-    exportlist \
-        rolebindingrestrictions \
-        rolebindingrestrictions \
-        'del('\
-'.items[].metadata.uid,'\
-'.items[].metadata.selfLink,'\
-'.items[].metadata.resourceVersion,'\
-'.items[].metadata.creationTimestamp)'
-}
-
 limitranges(){
     exportlist \
         limitranges \
@@ -334,17 +323,6 @@ resourcequotas(){
 '.items[].metadata.resourceVersion,'\
 '.items[].metadata.creationTimestamp,'\
 '.items[].status)'
-}
-
-podpreset(){
-    exportlist \
-        podpreset \
-        podpreset \
-        'del('\
-'.items[].metadata.uid,'\
-'.items[].metadata.selfLink,'\
-'.items[].metadata.resourceVersion,'\
-'.items[].metadata.creationTimestamp)'
 }
 
 cronjobs(){
@@ -465,10 +443,8 @@ fi
 rcs
 svcs
 pods
-podpreset
 cms
 ingresses
-rolebindingrestrictions
 limitranges
 resourcequotas
 pvcs
