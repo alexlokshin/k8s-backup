@@ -12,7 +12,7 @@ rm -rf /app/*
 
 # run the export
 if [ K8S_BACKUP_ALL ]; then
-  NAMESPACES=$(oc get projects --no-headers | awk '{ print $1 }')
+  NAMESPACES=$(kubectl get ns --no-headers | awk '{ print $1 }')
 else
   NAMESPACES=${K8S_NAMESPACES}
 fi
