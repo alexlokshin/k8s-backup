@@ -34,6 +34,16 @@ spec:
           value: {{ .Values.namespace | quote }}
         - name: BACKUP_SECRETS
           value: {{ .Values.backupSecrets | quote }}
+        - name: K8S_BACKUP_NAMESPACES
+          value: {{ .Values.backupNamespaces | quote }}
+        - name: K8S_BACKUP_ALL
+{{ if eq .Values.backupNamespaces "*" }}
+          value: true
+{{ else }}
+          value: false
+{{ end }}
+        - name: K8S_BACKUP_RETAIN_DAYS
+          value: {{ .Values.backupRetainDays | quote }}
         volumeMounts:
         - name: "{{ .Values.name }}-data"
           mountPath: /k8s-backup
