@@ -171,7 +171,7 @@ rcs(){
 }
 
 svcs(){
-    echo "Exporting services to ${NAMESPACE}/svc_*.json"
+    echo "Exporting 'service' resources to ${NAMESPACE}/svc_*.json"
     SVCS=$(kubectl get svc -n "${NAMESPACE}" -o jsonpath="{.items[*].metadata.name}")
     for svc in ${SVCS}; do
         kubectl get --export -o=json svc "${svc}" -n "${NAMESPACE}" | jq '
