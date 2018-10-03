@@ -5,7 +5,7 @@ TEST_IMAGE_TAG="latest"
 docker build -t "${TEST_IMAGE_NAME}:${TEST_IMAGE_TAG}" .
 
 test_Dockerfile() {
-  for PRG in kubectl k8s-backup namespace_export.sh; do
+  for PRG in kubectl k8s-backup namespace-export; do
     OUTPUT=$(docker run ${TEST_IMAGE_NAME}:${TEST_IMAGE_TAG} ${PRG} --help)
     assertNotEquals " can't run ${PRG};" "${OUTPUT}" ""
   done

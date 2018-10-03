@@ -5,5 +5,5 @@ backupCapacity: "2Gi"
 # space-separated list of namespaces OR asterisk for all
 backupNamespaces: "*"
 backupRetainDays: 7
-backupSecrets: true
+backupSecrets: false
 backupEphemeral: true

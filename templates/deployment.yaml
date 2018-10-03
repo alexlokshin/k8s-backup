@@ -38,9 +38,9 @@ spec:
           value: {{ .Values.backupNamespaces | quote }}
         - name: K8S_BACKUP_ALL
 {{ if eq .Values.backupNamespaces "*" }}
-          value: true
+          value: "true"
 {{ else }}
-          value: false
+          value: "false"
 {{ end }}
         - name: K8S_BACKUP_RETAIN_DAYS
           value: {{ .Values.backupRetainDays | quote }}

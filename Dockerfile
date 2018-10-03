@@ -11,10 +11,10 @@ RUN groupadd app && useradd -g app app && \
   mkdir /k8s-backup && \
   chown app:app /k8s-backup && \
   chmod 777 /app
-ADD scripts/namespace_export.sh /usr/bin/
+ADD bin/namespace-export /usr/bin/
 ADD bin/k8s-backup /usr/bin/
 
-RUN chmod +x /usr/bin/namespace_export.sh
+RUN chmod +x /usr/bin/namespace_export
 
 WORKDIR /app
 

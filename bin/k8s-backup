@@ -24,7 +24,7 @@ fi
 
 for NAMESPACE in ${NAMESPACES}; do
   echo "Processing '${NAMESPACE}'"
-  /bin/bash namespace_export.sh "${NAMESPACE}"
+  /bin/bash namespace-export "${NAMESPACE}"
 done
 
 # store
