@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+  echo "Usage: k8s-backup"
+  exit 0
+fi
+
 if [ -z "${K8S_BACKUP_RETAIN_DAYS}" ]; then
     K8S_BACKUP_RETAIN_DAYS=7
 fi

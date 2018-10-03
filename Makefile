@@ -8,6 +8,4 @@ install:
 delete:
 	helm delete --purge k8s-backup
 test:
-	cd bin; ./k8s-backup_test
-
-.PHONY: test
+	./Dockerfile_test
