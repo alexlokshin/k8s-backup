@@ -14,7 +14,7 @@ RUN groupadd app && useradd -g app app && \
 ADD bin/namespace-export /usr/bin/
 ADD bin/k8s-backup /usr/bin/
 
-RUN chmod +x /usr/bin/namespace_export
+RUN chmod +x /usr/bin/namespace-export
 
 WORKDIR /app
 
