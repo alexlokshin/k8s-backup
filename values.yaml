@@ -1,9 +1,10 @@
-name: "k8s-backup"
-namespace: "default"
-schedule: "15 0 * * *"
-backupCapacity: "2Gi"
-# space-separated list of namespaces OR asterisk for all
-backupNamespaces: "*"
-backupRetainDays: 7
-backupSecrets: false
-backupEphemeral: true
+{
+  "name": "k8s-backup",
+  "namespace": "default",
+  "schedule": "15 0 * * *",
+  "backupCapacity": "2Gi",
+  "backupNamespaces": "*",
+  "backupRetainDays": 7,
+  "backupSecrets": false,
+  "backupEphemeral": true
+}

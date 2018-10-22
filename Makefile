@@ -1,11 +1,12 @@
+NAME = "`jq -r .name values.yaml`"
 build:
-	docker build -t k8s-backup .
+	docker build -t $(NAME) .
 push:
-	docker tag k8s-backup gerald1248/k8s-backup:latest
-	docker push gerald1248/k8s-backup:latest
+	docker tag $(NAME) gerald1248/$(NAME):latest
+	docker push gerald1248/$(NAME):latest
 install:
-	helm install --name=k8s-backup .
+	helm install --name=$(NAME) .
 delete:
-	helm delete --purge k8s-backup
+	helm delete --purge $(NAME)
 test:
 	./Dockerfile_test

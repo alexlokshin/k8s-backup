@@ -1,5 +1,5 @@
-{{- define "roleName" }}
-{{- printf "\"%s-secret-reader\"" .Values.name -}}
+{{- define "roleBindingName" }}
+{{- printf "\"%s-custom-reader\"" .Values.name -}}
 {{- end }}
 {{- define "userNames" }}
 {{- printf "\"system:serviceaccount:%s:%s\"" .Values.namespace .Values.name -}}
@@ -7,7 +7,7 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ template "roleName" . }}
+  name: {{ template "roleBindingName" . }}
   namespace: {{ .Values.namespace | quote }}
   labels:
     app: {{ .Values.name | quote }}
